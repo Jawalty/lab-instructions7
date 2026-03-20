@@ -271,17 +271,17 @@ Suppose the objective of this plot was to show that the proportion of part-time 
 
 **Your proposed changes (write at least 3):**
 
-- Change 1: 
+- Change 1: You can bold the part time faculty data
 
-  Why: 
+  Why: This will give an emphasis on the specific data youre trying to highlight
 
-- Change 2: 
+- Change 2: You can add a subtitle about the part time faculty data
 
-  Why: 
+  Why: Labeling the points of emphasis, as well as giving description, helps the viewer understand more comprehensively.
 
-- Change 3: 
+- Change 3: You can also keep the Y axis more in line with the data. 
 
-  Why: 
+  Why: If the data leaves a lot of open space, you can widen the range that the data lies to have a larger and easier to view scale.
   
 ---
 
@@ -311,14 +311,36 @@ annotate("text", x = 2005, y = 40, label = "Part-time faculty rising")
 ```
 
 **Your improved visualization:**
-```{r storytelling-plot, fig.width = 10, fig.fullwidth = TRUE, eval = FALSE}
+```{r storytelling-plot, fig.width = 10, fig.fullwidth = TRUE, eval = TRUE}
 # Remember to change eval=FALSE to eval=TRUE!
-# Your code here - build on your Exercise 1 code
+staff_long %>%
+  ggplot(aes(x = year,
+             y = value,
+             group = faculty_type,
+             color = faculty_type)) +
+  geom_line() +
+  scale_color_manual(values = c(
+    "Part-Time Faculty"            = "red",
+    "Full-Time Tenured Faculty"    = "gray60",
+    "Full-Time Tenure-Track Faculty" = "gray60",
+    "Full-Time Non-Tenure-Track Faculty" = "gray60",
+    "Graduate Student Employees"   = "gray60"
+  )) +
+  coord_cartesian(ylim = c(0, 45)) +
+  annotate("text", x = 2005, y = 40, label = "Part-time faculty rising",
+           color = "red", fontface = "bold") +
+  labs(
+    title = "Faculty Type Trends Over Time",
+    subtitle = "Part-time faculty have grown steadily since 1975",
+    x = "Year",
+    y = "Percentage of Faculty",
+    color = "Faculty Type"
+  )
 ```
 
 **Explain your design decisions:** Write a brief paragraph (3-5 sentences) describing the changes you made and how they help tell the story that part-time faculty proportions have increased.
 
-
+I changed the colors of every faculty except part time, to gray, and bolded the part time data with red. I also added a subtitle to explain the growth of part time faculty's. This helps emphasize to the reader/viewer, the data I want them to interpret.
 
 🧶 ✅ ⬆️ **Knit, commit with message "Completed Exercises 2-3", and push your changes.**
 
