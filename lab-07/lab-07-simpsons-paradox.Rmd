@@ -402,7 +402,7 @@ The key is that **age is a confounding variable**:
 
 ---
 
-**Reflection question:** Can you think of other situations where Simpson's paradox might occur? What confounding variables should researchers watch out for in studies about health, education, or economics?
+**Reflection question:** Can you think of other situations where Simpson's paradox might occur? What confounding variables should researchers watch out for in studies about health, education, or economics? A drinking/alcoholics study would most likely have a similar data spread. Age and health correlate greatly, so age groups tell a big part of the story in these health related studies.
 
 ---
 
