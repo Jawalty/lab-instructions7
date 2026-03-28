@@ -272,13 +272,13 @@ Create a new variable called `age_cat` using the following scheme:
 - age > 64 → "65+"
 
 **Use `case_when()` to create the categorical variable:**
-```{r create-age-cat, eval = FALSE}
+```{r create-age-cat, eval = TRUE}
 # Remember to change eval=FALSE to eval=TRUE!
-Whickham %
+Whickham <- Whickham %>%
   mutate(age_cat = case_when(
-    age <= ___ ~ "18-44",
-    age > ___ & age <= ___ ~ "45-64",
-    age > ___ ~ "65+"
+    age <= 44 ~ "18-44",
+    age > 44 & age <= 64 ~ "45-64",
+    age > 64 ~ "65+"
   ))
 ```
 
@@ -290,7 +290,7 @@ Whickham %
 - Saves the result back to `Whickham` using `<-`
 
 **Verify it worked:**
-```{r verify-age-cat, eval = FALSE}
+```{r verify-age-cat, eval = TRUE}
 # Remember to change eval=FALSE to eval=TRUE!
 Whickham %>%
   count(age_cat)
@@ -298,9 +298,9 @@ Whickham %>%
 
 **How many people are in each age category?**
 
-- 18-44: _____
-- 45-64: _____
-- 65+: _____
+- 18-44: 624
+- 45-64: 447
+- 65+: 243
 
 ---
 
@@ -311,16 +311,16 @@ Whickham %>%
 Re-create the visualization depicting the relationship between smoking status and health outcome, faceted by `age_cat`. What changed? What might explain this change? 
 
 **Part A: Create the faceted visualization**
-```{r faceted-viz, eval = FALSE}
+```{r faceted-viz, eval = TRUE}
 # Remember to change eval=FALSE to eval=TRUE!
-ggplot(data = Whickham, aes(x = ___, fill = ___)) +
-  geom_bar(position = "___") +
-  facet_wrap(~___) +
+ggplot(data = Whickham, aes(x = smoker, fill = outcome)) +
+  geom_bar(position = "fill") +
+  facet_wrap(~age_cat) +
   labs(
-    title = "___",
-    x = "___",
-    y = "___",
-    fill = "___"
+    title = "Smoking Status vs Outcome by Age Group",
+    x = "Smoker",
+    y = "Proportion",
+    fill = "Outcome"
   )
 ```
 
@@ -329,18 +329,18 @@ ggplot(data = Whickham, aes(x = ___, fill = ___)) +
 **Part B: Examine the three-way contingency table**
 
 Extend the contingency table from earlier by breaking it down by age category:
-```{r three-way-table, eval = FALSE}
+```{r three-way-table, eval = TRUE}
 # Remember to change eval=FALSE to eval=TRUE!
 Whickham %>%
   count(smoker, age_cat, outcome)
 ```
 
 **Calculate proportions within each age group:**
-```{r age-conditional-probs, eval = FALSE}
+```{r age-conditional-probs, eval = TRUE}
 # Remember to change eval=FALSE to eval=TRUE!
 Whickham %>%
   count(smoker, age_cat, outcome) %>%
-  group_by(___, ___) %>%
+  group_by(smoker, age_cat) %>%
   mutate(proportion = n / sum(n))
 ```
 
@@ -352,17 +352,17 @@ Whickham %>%
 
 **Compare the relationship between smoking and outcome:**
 
-**Overall (from Exercise 5):** Smokers appeared to have _____________________ survival
+**Overall (from Exercise 5):** Smokers appeared to have increased survival rates compared to non-smokers.
 
-**Within each age group (from Exercise 7):** Smokers appear to have 
+**Within each age group (from Exercise 7):** Smokers appear to have a higher death rate among all age groups compared to non-smokers.
 
 **What might explain this change?**
 
 Consider:
 
-- Which age groups have more smokers?
-- Which age groups have higher survival rates overall?
-- How might age affect both smoking status and survival?
+- Which age groups have more smokers? the 18-44 age group has the most smokers.
+- Which age groups have higher survival rates overall? The younger age groups have the higher survival rates, decreasing as you get older.
+- How might age affect both smoking status and survival? Your immune system alongside the longevity of smoking will create organ failure.
 
 **Your explanation:**
 
